@@ -16,7 +16,7 @@ def main():
     rtscts = 0,
     )
 
-    ser.write(b"1145141919810###")
+    ser.write(b"1145141919810")
     while True:
         print(ser.read().decode('utf-8'))
 
