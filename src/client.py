@@ -2,25 +2,19 @@
 
 import subprocess
 import serial
+import sys
 
 def main():
     #subprocess.run("echo \"Hello World\"", shell=True, check=True)
     ser = serial.Serial(
     port = "/dev/ttyUSB0",
     baudrate = 115200,
-    #parity = serial.PARITY_NONE,
-    #bytesize = serial.EIGHTBITS,
-    #stopbits = serial.STOPBITS_ONE,
-    #timeout = None,
-    #xonxoff = 0,
-    #rtscts = 0,
     )
 
     with open('./dst/kernel8.img', 'rb') as f:
         data = f.read()
-        data += b'\x0a'
-
-    ser.write(data)
+    ser.write(len(data)) # send program byte size at first
+    ser.write(data) # next send program data
     while True:
         print(ser.read().decode('utf-8'))
 
