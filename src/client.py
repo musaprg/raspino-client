@@ -16,7 +16,11 @@ def main():
     #rtscts = 0,
     )
 
-    ser.write(b"1145141919810")
+    with open('./dst/kernel8.img', 'rb') as f:
+        data = f.read()
+        data += b'\x0a'
+
+    ser.write(data)
     while True:
         print(ser.read().decode('utf-8'))
 
