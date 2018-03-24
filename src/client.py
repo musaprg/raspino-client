@@ -13,7 +13,9 @@ def main():
 
     with open('./dst/kernel8.img', 'rb') as f:
         data = f.read()
-    ser.write(len(data)) # send program byte size at first
+    psize = str(len(data))
+    ser.write(str()).encode('utf-8')) # send program byte size at first
+    ser.write("\n".encode('utf-8'))
     ser.write(data) # next send program data
     while True:
         print(ser.read().decode('utf-8'))
